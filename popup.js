@@ -82,6 +82,8 @@ function render(data) {
                 });
         });
     });
+
+    content.innerHTML = html;
 }
 
 async function init() {
