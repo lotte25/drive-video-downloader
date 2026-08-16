@@ -20,7 +20,6 @@ function render(data) {
         (b.transcodeMetadata.height) - (a.transcodeMetadata.height)
     );
 
-    console.log(sortedStreams[0]);
     const title = data.title;
     let html = `<h2>${escapeHtml(title)}</h2>`;
 
@@ -57,27 +56,18 @@ function render(data) {
 
             const filename = sanitizeFilename(title);
 
-            browser.downloads
-                .download({
-                    url: stream.url,
-                    filename,
-                    saveAs: false
-                })
-                .then(() => {
-                    btn.textContent = "Downloaded";
-                })
-                .catch((err) => {
-                    console.error("[drive-video-downloader]: error downloading", err);
-                    btn.disabled = false;
-                    btn.textContent = "Retry";
-                });
+            btn.textContent = "Downloaded";
+
+            const download = document.createElement("a");
+            download.href = stream.url;
+            download.download = filename;
+            download.click();
         });
     });
 }
 
 async function init() {
     try {
-        console.log("hi")
         const tab = await browser.tabs.query({
             active: true,
             currentWindow: true
