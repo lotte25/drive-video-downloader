@@ -49,7 +49,7 @@ function render(data) {
     content.querySelectorAll("button.download").forEach((btn) => {
         btn.addEventListener("click", () => {
             const idx = Number(btn.dataset.index);
-            const stream = data.transcodes[idx];
+            const stream = sortedStreams[idx];
             if (!stream || !stream.url) return;
 
             btn.disabled = true;
