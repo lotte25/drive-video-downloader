@@ -1,4 +1,4 @@
-const TARGET_URL = "*://workspacevideo-pa.clients6.google.com/v1/drive/media/*/playback*";
+const TARGET_URL = "https://workspacevideo-pa.clients6.google.com/v1/drive/media/*/playback*";
 const tabData = {};
 
 function concatChunks(chunks) {
