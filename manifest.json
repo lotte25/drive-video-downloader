@@ -1,0 +1,35 @@
+{
+  "manifest_version": 2,
+  "name": "Drive Video Extractor",
+  "version": "1.0.0",
+  "description": "Let's you download download-restricted videos from Google Drive",
+  "permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "downloads",
+    "tabs",
+    "storage",
+    "https://workspacevideo-pa.clients6.google.com/*",
+    "https://drive.google.com/*"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_title": "Drive Video Extractor",
+    "browser_style": false
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "drive-video-extractor@example.local",
+      "strict_min_version": "68.0"
+    },
+    "gecko_android": {
+      "strict_min_version": "113.0"
+    }
+  }
+}
