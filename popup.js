@@ -20,6 +20,7 @@ function render(data) {
         (b.transcodeMetadata.height) - (a.transcodeMetadata.height)
     );
 
+    console.log(sortedStreams[0]);
     const title = data.title;
     let html = `<h2>${escapeHtml(title)}</h2>`;
 
@@ -36,12 +37,14 @@ function render(data) {
                             <div class="quality">${escapeHtml(qualityLabel)}</div>
                             <p class="meta">${dimensions} · ${mimetype}</p>
                         </div>
-                        <button class="button primary" data-index="${i}" ${stream.url ? "" : "disabled"}>
+                        <button class="button primary download" data-index="${i}" ${stream.url ? "" : "disabled"}>
                             ${stream.url ? "Download" : "No URL"}
                         </button>
                     </div>
                 </div>`;
     });
+
+    content.innerHTML = html;
 
     content.querySelectorAll("button.download").forEach((btn) => {
         btn.addEventListener("click", () => {
@@ -70,8 +73,6 @@ function render(data) {
                 });
         });
     });
-
-    content.innerHTML = html;
 }
 
 async function init() {
