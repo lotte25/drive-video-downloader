@@ -42,10 +42,10 @@ function handlePlayerResponse(json, tabId, sourceUrl) {
 
 browser.webRequest.onBeforeRequest.addListener(
     (details) => {
-        if (details.tabId < 0) return {};
+        if (details.tabId < 0 || details.method === "OPTIONS") return {};
         const filter = browser.webRequest.filterResponseData(details.requestId);
         const decoder = new TextDecoder("utf-8");
-
+        
         const chunks = [];
         filter.ondata = (event) => {
             chunks.push(event.data);
