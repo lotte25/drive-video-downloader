@@ -1,23 +1,104 @@
 <!DOCTYPE html>
 <head>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css">
     <meta charset="UTF-8" />
     <title>Drive Video Extractor</title>
+    <link rel="stylesheet" href="https://unpkg.com/chota@latest">
     <style>
+        :root {
+            --color-primary: #a78bfa;
+            --bg-color: #020202;
+            --bg-secondary-color: #0c0c0c;
+            --font-color: #e0e0e0;
+            --color-grey: #9090a0;
+            --color-darkGrey: #6a6a7a;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
         body {
-            width: 340px;
-            max-width: 100%;
+            margin: 0;
+            padding: 1.5rem;
+            width: 300px;
+            min-height: auto;
+            background-color: var(--bg-color);
+            color: var(--font-color);
+        }
+
+        h2 {
+            margin: 0 0 2rem 0;
+            font-size: 1.3rem;
+            line-height: 1.4;
+            word-break: break-word;
+            color: var(--font-color);
+            font-weight: 600;
+        }
+
+        .card {
+            padding: 1.2rem;
+            margin-bottom: 1.2rem;
+            border-radius: 0px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0);
+            background-color: var(--bg-secondary-color);
         }
 
         .stream {
-            margin-bottom: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .stream .quality {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: #c7b3ff;
+        }
+
+        .stream .meta {
+            font-size: 1.15rem;
+            color: var(--color-grey);
+            margin: 0;
+        }
+
+        .button {
+            padding: 0.75rem 1.5rem;
+            font-size: 1.2rem;
+            white-space: nowrap;    
+            background-color: var(--color-primary);
+            color: #1f1f2e;
+            border: none;
+            border-radius: 0px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .button:hover:not(:disabled) {
+            background-color: #b8a3ff;
+            box-shadow: 0 4px 12px rgba(167, 139, 250, 0.2);
+        }
+
+        .button:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        #content {
+            margin: 0;
+        }
+
+        .empty {
+            text-align: center;
+            color: var(--color-grey);
+            padding: 3rem 1.5rem;
+            font-size: 1.5rem;
         }
     </style>
 </head>
 
 <body>
     <div id="content">
-        <div class="empty">Loading...</div>
+        <p class="empty">Loading...</p>
     </div>
     <script src="popup.js"></script>
 </body>

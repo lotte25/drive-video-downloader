@@ -12,9 +12,7 @@ function render(data) {
     const content = document.getElementById("content");
 
     if (!data || !data.transcodes || data.transcodes.length === 0) {
-        content.innerHTML = `<div class="notification is-info">
-            <p>No intercepted request yet.<br/>Reload the page and open the popup again.</p>
-        </div>`;
+        content.innerHTML = `<p class="empty">No intercepted request yet.<br/>Reload the page and open the popup again.</p>`;
         return;
     }
 
@@ -23,7 +21,7 @@ function render(data) {
     );
 
     const title = data.title;
-    let html = `<h1 class="title is-4">${escapeHtml(title)}</h1>`;
+    let html = `<h2>${escapeHtml(title)}</h2>`;
 
     sortedStreams.forEach((stream, i) => {
         const dimensions = `${stream.transcodeMetadata.width}x${stream.transcodeMetadata.height}`;
@@ -32,28 +30,18 @@ function render(data) {
             ? stream.transcodeMetadata.videoFps : ""
         }`;
 
-        html += `<div class="stream box">
-                    <div class="level is-mobile">
-                        <div class="level-left">
-                            <div class="level-item">
-                                <div>
-                                    <div class="tag is-info">${escapeHtml(qualityLabel)}</div>
-                                    <p class="is-size-7 has-text-grey-light">${escapeHtml([dimensions, mimetype].filter(Boolean).join(" - "))}</p>
-                                </div>
-                            </div>
+        html += `<div class="card">
+                    <div class="stream">
+                        <div class="info">
+                            <div class="quality">${escapeHtml(qualityLabel)}</div>
+                            <p class="meta">${dimensions} · ${mimetype}</p>
                         </div>
-                        <div class="level-right">
-                            <div class="level-item">
-                                <button class="download button is-info is-small" data-index="${i}" ${stream.url ? "" : "disabled"}>
-                                    ${stream.url ? "Download" : "No URL"}
-                                </button>
-                            </div>
-                        </div>
+                        <button class="button primary" data-index="${i}" ${stream.url ? "" : "disabled"}>
+                            ${stream.url ? "Download" : "No URL"}
+                        </button>
                     </div>
                 </div>`;
     });
-
-    content.innerHTML = html;
 
     content.querySelectorAll("button.download").forEach((btn) => {
         btn.addEventListener("click", () => {
